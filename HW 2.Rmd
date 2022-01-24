@@ -1,0 +1,150 @@
+# IST 387 HW 2
+##### Copyright 2021, Jeffrey Stanton, Jeffrey Saltz, and Jasmina Tacheva
+
+
+```R
+# Enter your name here: Ezra Cohen
+```
+
+### Attribution statement: (choose only one and delete the rest)
+
+
+```R
+# 1. I did this homework by myself, with help from the book and the professor.
+```
+
+### Reminders of things to practice from last week: 
+Assignment arrow  		<- <br>
+The combine command 	c( ) <br>
+Descriptive statistics 	mean( ) sum( ) max( ) <br>
+Arithmetic operators		+ - * /<br>
+Boolean operators		>    <    >=    <=   ==   !=  <br>
+
+**This Week:** Explore the **quakes** dataset (which is included in R). Copy the **quakes** dataset into a new dataframe (call it **myQuakes**), so that if you need to start over, you can do so easily (by copying quakes into myQuakes again). Summarize the variables in **myQuakes**. Use these commands to get started:
+
+
+
+```R
+myQuakes <- quakes		# Copy into new data frame
+summary(myQuakes)	# Summarize data in the console
+head(myQuakes)		# View the data in a new tab in RStudio
+```
+
+
+          lat              long           depth            mag      
+     Min.   :-38.59   Min.   :165.7   Min.   : 40.0   Min.   :4.00  
+     1st Qu.:-23.47   1st Qu.:179.6   1st Qu.: 99.0   1st Qu.:4.30  
+     Median :-20.30   Median :181.4   Median :247.0   Median :4.60  
+     Mean   :-20.64   Mean   :179.5   Mean   :311.4   Mean   :4.62  
+     3rd Qu.:-17.64   3rd Qu.:183.2   3rd Qu.:543.0   3rd Qu.:4.90  
+     Max.   :-10.72   Max.   :188.1   Max.   :680.0   Max.   :6.40  
+        stations     
+     Min.   : 10.00  
+     1st Qu.: 18.00  
+     Median : 27.00  
+     Mean   : 33.42  
+     3rd Qu.: 42.00  
+     Max.   :132.00  
+
+
+
+<table>
+<caption>A data.frame: 6 × 5</caption>
+<thead>
+	<tr><th></th><th scope=col>lat</th><th scope=col>long</th><th scope=col>depth</th><th scope=col>mag</th><th scope=col>stations</th></tr>
+	<tr><th></th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+	<tr><th scope=row>1</th><td>-20.42</td><td>181.62</td><td>562</td><td>4.8</td><td>41</td></tr>
+	<tr><th scope=row>2</th><td>-20.62</td><td>181.03</td><td>650</td><td>4.2</td><td>15</td></tr>
+	<tr><th scope=row>3</th><td>-26.00</td><td>184.10</td><td> 42</td><td>5.4</td><td>43</td></tr>
+	<tr><th scope=row>4</th><td>-17.97</td><td>181.66</td><td>626</td><td>4.1</td><td>19</td></tr>
+	<tr><th scope=row>5</th><td>-20.42</td><td>181.96</td><td>649</td><td>4.0</td><td>11</td></tr>
+	<tr><th scope=row>6</th><td>-19.68</td><td>184.31</td><td>195</td><td>4.0</td><td>12</td></tr>
+</tbody>
+</table>
+
+
+
+**Step 1:** Explore the earthquake magnitude variable called **mag**  <br>
+(To address these items, add a comment after the command that produces the result in your code.) <br>
+
+A.	What is the average magnitude? Use mean() or summary():
+
+
+```R
+mean(myQuakes$mag)
+```
+
+B.	What is the magnitude of the largest earthquake? Use max() or summary() and save the result in a variable called **maxQuake**:
+
+
+```R
+maxQuake <- max(myQuakes$mag)
+maxQuake
+```
+
+C.	What is the magnitude of the smallest earthquake? Use min() or summary() and save the result in a variable called **minQuake**:
+
+
+```R
+
+```
+
+D.	Create a **sorted dataframe** based on magnitude and store it in **quakeSorted**. **Hint:** Use order( )
+
+
+
+```R
+minQuake <- min(myQuakes$mag)
+minQuake
+```
+
+**Step 2:** Explore the **stations** variable  <br>
+
+E.	**Write a comment:** Does there appear to be a relationship between magnitude and the number of reporting stations?
+
+
+```R
+magandstations <- myQuakes[,-1:-3]
+sortedmagandstations <- data.frame(sort(magandstations$mag),magandstations$stations)
+head(sortedmagandstations,10)
+tail(sortedmagandstations,10)
+#Looking at the amount of stations that reported for the lowest 10 magnitude versus the amount of stations that reported for the highest 10 magnitudes shows that More stations reported on the higher magnitude earthquakes
+```
+
+F.	What are the latitude and longitude of the quake reported by the largest number of stations? **Hint:** Use which.max( )
+
+
+```R
+index <- which.max(myQuakes$mag)
+myQuakes[index,-3:-5]
+```
+
+G.	What are the latitude and longitude of the quake reported by the smallest number of stations? **Hint:** Use which.min( )
+
+
+```R
+index2 <- which.min(myQuakes$stations)
+myQuakes[index2,-3:-5]
+```
+
+**Step 3:** Using conditional if statements <br>
+H.	 Test if **maxQuake** is greater than 7 (output “yes” or “no”) <br>
+**Hint:** Try modifying the following code in R: 
+
+
+```R
+if  (maxQuake > 7) "yes" else "no"
+```
+
+
+'100 is less than 150'
+
+
+I.	 Following the same logic, test if minQuake is less than 3 (output “yes” or “no”):
+
+
+```R
+if  (minQuake < 3) "yes" else "no"
+```
